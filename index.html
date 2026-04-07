@@ -105,6 +105,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .paper-row:hover{background:var(--surface2)}
 .cell-title{max-width:400px}
 .paper-title{color:var(--text);font-size:13.5px;line-height:1.5}
+.title-link{color:var(--text);text-decoration:none;border-bottom:1px solid var(--border2);transition:color .15s,border-color .15s}
+.title-link:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .paper-author{color:var(--text3);font-size:12px;margin-top:2px;font-style:italic}
 .paper-journal{color:var(--text2);font-size:13px;white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis;font-style:italic}
 .paper-year{color:var(--text2);font-size:13px;font-weight:500;white-space:nowrap}
@@ -674,7 +676,9 @@ function render() {
             return `
             <tr class="paper-row" onclick="openModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">
               <td class="cell-title">
-                <div class="paper-title">${p.title||'—'}</div>
+                <div class="paper-title">${p.doi
+                  ? `<a href="${p.doi}" target="_blank" onclick="event.stopPropagation()" class="title-link">${p.title||'—'}</a>`
+                  : (p.title||'—')}</div>
                 <div class="paper-author">${p.first_author||''}</div>
               </td>
               <td><div class="paper-author">${p.first_author||'—'}</div></td>
