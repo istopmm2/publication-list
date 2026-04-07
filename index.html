@@ -409,7 +409,7 @@ sb.auth.getSession().then(({ data:{ session } }) => { if (session) showApp(); })
 
 // ── DATA ──
 async function loadPapers() {
-  const { data, error } = await sb.from('papers').select('*').order('created_at', { ascending:true });
+  const { data, error } = await sb.from('papers').select('id,category,title,first_author,year,journal,status,doi,pdf_url,notes,created_at').order('created_at', { ascending:true });
   if (error) { showToast('Error loading papers', true); return; }
   allPapers = data || [];
   render();
